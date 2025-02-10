@@ -1,0 +1,233 @@
+/* 🌍 Estilos Generales */
+body {
+  font-family: 'Poppins', sans-serif;
+  transition: background 0.3s, color 0.3s;
+  background: #f4f4f4;
+}
+
+body.dark {
+  background: #181818;
+  color: white;
+}
+
+/* 📌 Contenedor Principal */
+.app {
+  text-align: center;
+  padding: 40px;
+}
+
+/* 🌙 Botón de Modo Oscuro con diseño moderno */
+.theme-toggle {
+  margin: 20px 0;
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #ff8c00, #ff3b3b);
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  box-shadow: 0 4px 10px rgba(255, 0, 0, 0.3);
+  transition: all 0.3s ease-in-out;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 14px rgba(255, 0, 0, 0.5);
+}
+
+/* 📌 Menú de Navegación con mejor diseño */
+nav ul {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  list-style: none;
+  padding: 10px 0;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+  background: #ff5900;
+  padding: 12px;
+  border-radius: 10px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 18px;
+  color: white;
+  transition: color 0.3s, transform 0.2s;
+}
+
+nav ul li a:hover {
+  color: #ffeb3b;
+  transform: scale(1.1);
+}
+
+/* 🛠 Tarjetas con efecto neomorfismo */
+.card {
+  max-width: 800px;
+  margin: 30px auto;
+  padding: 20px;
+  border-radius: 15px;
+  background: white;
+  box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.1),
+              -8px -8px 15px rgba(255, 255, 255, 0.7);
+  transition: all 0.3s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+body.dark .card {
+  background: #242424;
+  box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.3),
+              -8px -8px 15px rgba(255, 255, 255, 0.1);
+}
+
+/* 🔥 Títulos con colores vivos */
+h2 {
+  font-size: 30px;
+  margin-bottom: 10px;
+  border-bottom: 4px solid #ff3b3b;
+  display: inline-block;
+  padding-bottom: 5px;
+}
+
+/* 📌 Estilos de Enlaces */
+a {
+  color: #ff3b3b;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+a:hover {
+  color: #ff8c00;
+}
+
+/* 🔹 Mejor espaciado de listas */
+ul {
+  text-align: left;
+  margin-left: 20px;
+}
+
+.skills-icons, .social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.skills-icons img, .social-icons img {
+  width: 40px;
+  height: 40px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.skills-icons img:hover, .social-icons img:hover {
+  transform: scale(1.2);
+}
+
+
+.skills-icons, .social-icons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.skills-icons img, .social-icons img {
+  width: 50px;
+  height: 50px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.skills-icons img:hover, .social-icons img:hover {
+  transform: scale(1.2);
+}
+
+.skills-icons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 10px;
+  max-width: 90%;
+  padding: 20px;
+  overflow: hidden;
+}
+
+.skills-icons img {
+  width: 50px;
+  height: 50px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.skills-icons img:hover {
+  transform: scale(1.2);
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  text-align: left;
+}
+
+.profile-image {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.header-text {
+  max-width: 400px;
+}
+
+.company-icons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.company-icon {
+  width: 50px;  /* Ajusta el tamaño según prefieras */
+  height: auto;
+  max-height: 50px;
+  object-fit: contain;
+}
+
+
+.experience-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.experience-item {
+  background: #f9f9f9;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background 0.3s, color 0.3s;
+}
+
+.dark .experience-item {
+  background: #1e1e1e;
+  color: white;
+  box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
+}
+
+.date {
+  font-size: 0.9em;
+  color: #555;
+}
+
+.dark .date {
+  color: #bbb;
+}
