@@ -158,19 +158,19 @@ const App = () => {
         <h2>Contact</h2>
         <ul className="contact-details">
           <li>
-            📧 Email: 
-            <a href="mailto:carr.gdl1@gmail.com"> carr.gdl1@gmail.com</a>
+            📧 Email:
+            <a href="mailto:carr@cesbear.com"> send me an email</a>
           </li>
           <li>
             <img src="/icons/linkedin.svg" alt="LinkedIn" className="contact-icon" />
-            <a href="https://www.linkedin.com/in/cesar-alejandro-ramirez/" 
+            <a href="https://www.linkedin.com/in/cesar-alejandro-ramirez/"
               target="_blank" rel="noopener noreferrer">
               César Alejandro Ramírez
             </a>
           </li>
           <li>
             <img src="/icons/github.svg" alt="GitHub" className="contact-icon" />
-            <a href="https://github.com/CesBear" 
+            <a href="https://github.com/CesBear"
               target="_blank" rel="noopener noreferrer">
               CesBear
             </a>
