@@ -15,13 +15,16 @@ const App = () => {
 
   return (
     <div className="app">
+
       <header className="header-container">
         <title>SDET Cesar Ramirez</title>
-        <img src="/icons/profile.png" alt="César Alejandro Ramírez Rodríguez" className="profile-image" />
+        <img src="/icons/profile.png" alt="César Ramírez" className="profile-image" />
         <div className="header-text">
           <h1>César Ramírez</h1>
           <h2>Software Development Engineer in Test (SDET)</h2>
           <p>📍 I'm based in the beautiful México 🇲🇽</p>
+        </div>
+        <div>
           <button className="theme-toggle" onClick={toggleTheme}>{darkMode ? 'Light Mode' : 'Dark Mode'}</button>
         </div>
       </header>
@@ -34,6 +37,7 @@ const App = () => {
           <li><a href="#certifications">Certifications</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
+
       </nav>
 
       <section id="about" className="card">
@@ -93,6 +97,19 @@ const App = () => {
       <section id="experience" className="card">
         <h2>Experience</h2>
         <div className="experience-container">
+          <div className="company-icons">
+            <img src="/icons/altimetrik.svg" alt="Altimetrik" className="company-icon" title="Altimetrik" />
+            <img src="/icons/epam.png" alt="Epam" className="company-icon" title="Epam" />
+            <img src="/icons/globant.png" alt="Globant" className="company-icon" title="Globant" />
+            <img src="/icons/apexsystems.jpg" alt="Apex Systems" className="company-icon" title="Apex Systems" />
+            <img src="/icons/zipco.svg" alt="Zip.CO" className="company-icon" title="Zip.CO" />
+            <img src="/icons/paysafe.png" alt="PaySafe" className="company-icon" title="PaySafe" />
+            <img src="/icons/salesforce.svg" alt="Salesforce" className="company-icon" title="Salesforce" />
+            <img src="/icons/thomsonreuters.png" alt="Thomson Reuters" className="company-icon" title="Thomson Reuters" />
+            <img src="/icons/johnsoncontrols.svg" alt="Johnson Controls" className="company-icon" title="Johnson Controls" />
+            <img src="/icons/citi.svg" alt="Citi" className="company-icon" title="Citi" />
+            <img src="/icons/ibm.svg" alt="IBM" className="company-icon" title="IBM" />
+          </div>
           <div className="experience-item">
             <h3>Zip.CO - Sr. Software Development Engineer in Test</h3>
             <span className="date">(Aug 2022 - Dec 2025)</span>
@@ -134,30 +151,31 @@ const App = () => {
             <p>Managed QA processes, test lifecycle, automation pilots in Selenium, and coordinated inter-application testing.</p>
           </div>
         </div>
-        <div className="company-icons">
-          <img src="/icons/altimetrik.svg" alt="Altimetrik" className="company-icon" title="Altimetrik" />
-          <img src="/icons/epam.png" alt="Epam" className="company-icon" title="Epam" />
-          <img src="/icons/globant.png" alt="Globant" className="company-icon" title="Globant" />
-          <img src="/icons/apexsystems.jpg" alt="Apex Systems" className="company-icon" title="Apex Systems" />
-          <img src="/icons/zipco.svg" alt="Zip.CO" className="company-icon" title="Zip.CO" />
-          <img src="/icons/paysafe.png" alt="PaySafe" className="company-icon" title="PaySafe" />
-          <img src="/icons/salesforce.svg" alt="Salesforce" className="company-icon" title="Salesforce" />
-          <img src="/icons/thomsonreuters.png" alt="Thomson Reuters" className="company-icon" title="Thomson Reuters" />
-          <img src="/icons/johnsoncontrols.svg" alt="Johnson Controls" className="company-icon" title="Johnson Controls" />
-          <img src="/icons/citi.svg" alt="Citi" className="company-icon" title="Citi" />
-          <img src="/icons/ibm.svg" alt="IBM" className="company-icon" title="IBM" />
-        </div>
       </section>
 
-      <section id="contact" className="card">
+
+      <section id="contact" className="card contact-section">
         <h2>Contact</h2>
-        <p>Email: <a href="mailto:carr.gdl1@gmail.com">carr.gdl1@gmail.com</a></p>
-        <p>LinkedIn: <a href="https://www.linkedin.com/in/cesar-alejandro-ramirez/" target="_blank">César Alejandro Ramírez</a></p>
-        <p>GitHub: <a href="https://github.com/CesBear" target="_blank">CesBear</a></p>
-        <div className="social-icons">
-          <img src="/icons/instagram.svg" alt="Instagram" />
-          <img src="/icons/linkedin.svg" alt="LinkedIn" />
-        </div>
+        <ul className="contact-details">
+          <li>
+            📧 Email: 
+            <a href="mailto:carr.gdl1@gmail.com"> carr.gdl1@gmail.com</a>
+          </li>
+          <li>
+            <img src="/icons/linkedin.svg" alt="LinkedIn" className="contact-icon" />
+            <a href="https://www.linkedin.com/in/cesar-alejandro-ramirez/" 
+              target="_blank" rel="noopener noreferrer">
+              César Alejandro Ramírez
+            </a>
+          </li>
+          <li>
+            <img src="/icons/github.svg" alt="GitHub" className="contact-icon" />
+            <a href="https://github.com/CesBear" 
+              target="_blank" rel="noopener noreferrer">
+              CesBear
+            </a>
+          </li>
+        </ul>
       </section>
     </div>
   );

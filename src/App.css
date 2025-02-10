@@ -1,13 +1,25 @@
 /* 🌍 Estilos Generales */
+:root {
+  --primary-color: #ff3b3b;
+  --secondary-color: #ff7b00;
+  --background-light: #f4f4f4;
+  --background-dark: #181818;
+  --text-dark: black;
+  --text-light: white;
+  --card-bg-light: white;
+  --card-bg-dark: #242424;
+}
+
 body {
   font-family: 'Poppins', sans-serif;
   transition: background 0.3s, color 0.3s;
-  background: #f4f4f4;
+  background: var(--background-light);
+  color: var(--text-dark);
 }
 
 body.dark {
-  background: #181818;
-  color: white;
+  background: var(--background-dark);
+  color: var(--text-light);
 }
 
 /* 📌 Contenedor Principal */
@@ -16,14 +28,14 @@ body.dark {
   padding: 40px;
 }
 
-/* 🌙 Botón de Modo Oscuro con diseño moderno */
+/* 🌙 Botón de Modo Oscuro */
 .theme-toggle {
   margin: 20px 0;
   padding: 12px 24px;
   border: none;
   cursor: pointer;
   border-radius: 8px;
-  background: linear-gradient(135deg, #ff8c00, #ff3b3b);
+  background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
   color: white;
   font-weight: bold;
   font-size: 16px;
@@ -36,16 +48,14 @@ body.dark {
   box-shadow: 0 6px 14px rgba(255, 0, 0, 0.5);
 }
 
-/* 📌 Menú de Navegación con mejor diseño */
+/* 📌 Menú de Navegación */
 nav ul {
   display: flex;
   justify-content: center;
   gap: 20px;
   list-style: none;
-  padding: 10px 0;
-  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
-  background: #ff5900;
   padding: 12px;
+  background: var(--primary-color);
   border-radius: 10px;
 }
 
@@ -58,7 +68,7 @@ nav ul li a {
 }
 
 nav ul li a:hover {
-  color: #ffeb3b;
+  color: var(--secondary-color);
   transform: scale(1.1);
 }
 
@@ -68,7 +78,7 @@ nav ul li a:hover {
   margin: 30px auto;
   padding: 20px;
   border-radius: 15px;
-  background: white;
+  background: var(--card-bg-light);
   box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.1),
               -8px -8px 15px rgba(255, 255, 255, 0.7);
   transition: all 0.3s ease-in-out;
@@ -79,7 +89,7 @@ nav ul li a:hover {
 }
 
 body.dark .card {
-  background: #242424;
+  background: var(--card-bg-dark);
   box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.3),
               -8px -8px 15px rgba(255, 255, 255, 0.1);
 }
@@ -88,20 +98,20 @@ body.dark .card {
 h2 {
   font-size: 30px;
   margin-bottom: 10px;
-  border-bottom: 4px solid #ff3b3b;
+  border-bottom: 4px solid var(--primary-color);
   display: inline-block;
   padding-bottom: 5px;
 }
 
 /* 📌 Estilos de Enlaces */
 a {
-  color: #ff3b3b;
+  color: var(--primary-color);
   text-decoration: none;
   font-weight: bold;
 }
 
 a:hover {
-  color: #ff8c00;
+  color: var(--secondary-color);
 }
 
 /* 🔹 Mejor espaciado de listas */
@@ -110,63 +120,29 @@ ul {
   margin-left: 20px;
 }
 
-.skills-icons, .social-icons {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  margin-top: 10px;
-}
-
-.skills-icons img, .social-icons img {
-  width: 40px;
-  height: 40px;
-  transition: transform 0.3s ease-in-out;
-}
-
-.skills-icons img:hover, .social-icons img:hover {
-  transform: scale(1.2);
-}
-
-
-.skills-icons, .social-icons {
+/* 🔥 Estilos unificados para íconos */
+.skills-icons, .company-icons {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 15px;
   margin-top: 10px;
-}
-
-.skills-icons img, .social-icons img {
-  width: 50px;
-  height: 50px;
-  transition: transform 0.3s ease-in-out;
-}
-
-.skills-icons img:hover, .social-icons img:hover {
-  transform: scale(1.2);
-}
-
-.skills-icons {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 15px;
-  margin-top: 10px;
-  max-width: 90%;
+  max-width: 100%;
   padding: 20px;
-  overflow: hidden;
+  overflow: auto;
 }
 
-.skills-icons img {
+.skills-icons img, .company-icons img {
   width: 50px;
   height: 50px;
-  transition: transform 0.3s ease-in-out;
+  transition: transform 0.8s ease-in-out;
 }
 
-.skills-icons img:hover {
+.skills-icons img:hover, .company-icons img:hover {
   transform: scale(1.2);
 }
 
+/* 👤 Estilos del Header */
 .header-container {
   display: flex;
   align-items: center;
@@ -187,22 +163,7 @@ ul {
   max-width: 400px;
 }
 
-.company-icons {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 15px;
-  margin-top: 20px;
-}
-
-.company-icon {
-  width: 50px;  /* Ajusta el tamaño según prefieras */
-  height: auto;
-  max-height: 50px;
-  object-fit: contain;
-}
-
-
+/* 📌 Sección de Experiencia */
 .experience-container {
   display: flex;
   flex-direction: column;
@@ -231,3 +192,46 @@ ul {
 .dark .date {
   color: #bbb;
 }
+
+/* 📌 Contacto */
+.contact-section {
+  text-align: center;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: var(--card-bg-light);
+}
+
+body.dark .contact-section {
+  background-color: var(--card-bg-dark);
+}
+
+.contact-details {
+  list-style: none;
+  padding: 0;
+  font-size: 1.1rem;
+}
+
+.contact-details li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+  margin: 10px 0;
+}
+
+.contact-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.contact-details a {
+  color: var(--link-color, #0077cc);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.contact-details a:hover {
+  text-decoration: underline;
+}
+
