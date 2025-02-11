@@ -77,7 +77,7 @@ const App = () => {
           <img src="/icons/espresso.svg" alt="Espresso" title="Espresso" />
           <img src="/icons/kotlin.svg" alt="Kotlin" title="Kotlin" />
           <img src="/icons/appium.svg" alt="Appium" title="Appium" />
-          <img src="/icons/playwrigth.svg" alt="Playwright" title="Playwright" />
+          <img src="/icons/playwright.svg" alt="Playwright" title="Playwright" />
           <img src="/icons/testing.svg" alt="Testing" title="Testing" />
           <img src="/icons/selenium.svg" alt="Selenium" title="Selenium" />
           <img src="/icons/defecthunting.svg" alt="Defect Hunting" title="Defect Hunting" />
