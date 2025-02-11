@@ -73,7 +73,7 @@ const App = () => {
           <img src="/icons/docker.svg" alt="Docker" title="Docker" />
           <img src="/icons/azure.svg" alt="Azure" title="Azure" />
           <img src="/icons/linux.svg" alt="Linux" title="Linux" />
-          <img src="/icons/automationMobile.svg" alt="Automation Mobile" title="Automation Mobile" />
+          <img src="/icons/AutomationMobile.svg" alt="Automation Mobile" title="Automation Mobile" />
           <img src="/icons/espresso.svg" alt="Espresso" title="Espresso" />
           <img src="/icons/kotlin.svg" alt="Kotlin" title="Kotlin" />
           <img src="/icons/appium.svg" alt="Appium" title="Appium" />
