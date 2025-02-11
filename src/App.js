@@ -37,7 +37,6 @@ const App = () => {
           <li><a href="#certifications">Certifications</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
-
       </nav>
 
       <section id="about" className="card">
