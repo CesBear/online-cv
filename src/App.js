@@ -15,7 +15,6 @@ const App = () => {
 
   return (
     <div className="app">
-
       <header className="header-container">
         <title>SDET Cesar Ramirez</title>
         <img src="/icons/profile.png" alt="César Ramírez" className="profile-image" />

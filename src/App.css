@@ -237,6 +237,15 @@ body.dark .contact-section {
 
 /* 📱 Mobile view adjustments */
 @media (max-width: 768px) {
+  .header-container {
+    flex-direction: column;  /* Stack the items vertically on small screens */
+    align-items: center;     /* Center the items */
+    gap: 10px;               /* Reduce the gap between items */
+    padding: 10px;           /* Adjust padding for better spacing */
+    width: 100%;             /* Make each list item take up the full width */
+    text-align: center;      /* Center the text in the list items */
+  }
+
   nav ul {
     flex-direction: column;  /* Stack the items vertically on small screens */
     align-items: center;     /* Center the items */
