@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import './styles/App.css';
-import Header from './components/Header';
-import Navigation from './components/Navigation';
-import About from './components/About';
-import Skills from './components/Skills';
-import Certifications from './components/Certifications';
-import Experience from './components/Experience';
-import Contact from './components/Contact';
+import Header from './components/Header/Header';
+import Navigation from './components/Navigation/Navigation';
+import About from './components/About/About';
+import Skills from './components/Skills/Skills';
+import Certifications from './components/Certification/Certifications';
+import Experience from './components/Experience/Experience';
+import Contact from './components/Contact/Contact';
 
 const App = () => {
   const [darkMode, setDarkMode] = useState(
