@@ -14,6 +14,13 @@ const Contact = () => {
             Cesar Ramirez
           </a>
         </li>
+        <li>
+            <img src="/icons/github.svg" alt="GitHub" className="contact-icon" />
+            <a href="https://github.com/CesBear" 
+              target="_blank" rel="noopener noreferrer">
+              CesBear
+            </a>
+          </li>
       </ul>
     </section>
   );
