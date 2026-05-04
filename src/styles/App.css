@@ -246,14 +246,17 @@ nav ul li a:hover::after { width: 60%; }
   gap: 8px;
   padding: 7px 18px;
   border-radius: 30px;
-  background: rgba(6, 9, 16, 0.55);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255,255,255,0.07);
+  background: rgba(6, 9, 16, 0.72);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.10);
   font-family: 'Courier New', monospace;
   font-size: 0.72rem;
   white-space: nowrap;
   transition: opacity 0.4s ease;
   pointer-events: none;
+  max-width: calc(100vw - 40px);
+  overflow: hidden;
 }
 .cymatics-info.transitioning { opacity: 0.5; }
 
@@ -269,22 +272,33 @@ nav ul li a:hover::after { width: 60%; }
   50% { transform: scale(1.4); opacity: 0.7; }
 }
 
-.cymatics-name  { font-weight: 700; letter-spacing: 0.5px; }
-.cymatics-sep   { color: rgba(255,255,255,0.25); }
-.cymatics-freq  { color: rgba(255,255,255,0.7); }
-.cymatics-note  { color: rgba(255,255,255,0.4); font-size: 0.67rem; }
-.cymatics-sources { color: rgba(255,255,255,0.5); }
-.cymatics-sep-lg  { color: rgba(255,255,255,0.2); }
-.cymatics-desc  { color: rgba(255,255,255,0.38); font-style: italic; }
+.cymatics-name    { font-weight: 700; letter-spacing: 0.5px; }
+.cymatics-sep     { color: rgba(255,255,255,0.25); }
+.cymatics-freq    { color: rgba(255,255,255,0.80); }
+.cymatics-note    { color: rgba(255,255,255,0.45); font-size: 0.67rem; }
+.cymatics-sources { color: rgba(255,255,255,0.55); }
+.cymatics-sep-lg  { color: rgba(255,255,255,0.20); }
+.cymatics-desc    { color: rgba(255,255,255,0.42); font-style: italic; }
 
-body.light .cymatics-info { background: rgba(240,244,248,0.7); border-color: rgba(0,0,0,0.08); }
-body.light .cymatics-freq,
-body.light .cymatics-sources { color: rgba(0,0,0,0.6); }
-body.light .cymatics-desc  { color: rgba(0,0,0,0.35); }
+/* Light mode — dark text on light frosted pill */
+body.light .cymatics-info {
+  background: rgba(20, 25, 35, 0.82);
+  border-color: rgba(255,255,255,0.12);
+}
 
-@media (max-width: 768px) {
-  .cymatics-sep-lg, .cymatics-desc { display: none; }
-  .cymatics-info { font-size: 0.68rem; padding: 6px 14px; }
+/* Mobile — hide verbose parts, keep it to one short line */
+@media (max-width: 600px) {
+  .cymatics-sep-lg,
+  .cymatics-desc,
+  .cymatics-sources,
+  .cymatics-note { display: none; }
+
+  .cymatics-info {
+    font-size: 0.70rem;
+    padding: 6px 14px;
+    gap: 6px;
+    bottom: 12px;
+  }
 }
 
 .theme-toggle {
