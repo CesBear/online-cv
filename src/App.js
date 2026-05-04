@@ -7,16 +7,29 @@ import Skills from './components/Skills/Skills';
 import Certifications from './components/Certification/Certifications';
 import Experience from './components/Experience/Experience';
 import Contact from './components/Contact/Contact';
-
 const App = () => {
   const [darkMode, setDarkMode] = useState(
-    localStorage.getItem('theme') === 'dark'
+    localStorage.getItem('theme') !== 'light'
   );
 
   useEffect(() => {
-    document.body.className = darkMode ? 'dark' : '';
+    document.body.className = darkMode ? '' : 'light';
     localStorage.setItem('theme', darkMode ? 'dark' : 'light');
   }, [darkMode]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('revealed');
+          observer.unobserve(e.target);
+        }
+      }),
+      { threshold: 0.08 }
+    );
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
 
   const toggleTheme = () => setDarkMode(!darkMode);
 
