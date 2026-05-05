@@ -1,59 +1,60 @@
-# 🚀 SDET Portfolio - César Ramírez
+# SDET Portfolio
 
-Este es el repositorio de mi página personal como **Software Development Engineer in Test (SDET)**, construida con **React**.
+Repositorio de la pagina personal de Cesar Ramirez como Software Development Engineer in Test, construido con React.
 
-## 📂 Estructura del Proyecto
+## Estructura actual
 
+```text
+online-cv/
+|-- public/
+|   |-- icons/
+|   |-- favicon.ico
+|   |-- index.html
+|   |-- manifest.json
+|   |-- robots.txt
+|   `-- sitemap.xml
+|-- src/
+|   |-- components/
+|   |   |-- About/
+|   |   |-- Certification/
+|   |   |-- Contact/
+|   |   |-- Experience/
+|   |   |-- Header/
+|   |   |-- Navigation/
+|   |   `-- Skills/
+|   |-- styles/
+|   |-- App.js
+|   |-- index.js
+|   |-- reportWebVitals.js
+|   `-- setupTests.js
+|-- .github/workflows/test-suite.yml
+|-- package.json
+`-- README.md
 ```
-📦 my-project/
-├── 📂 public/               # Archivos estáticos
-├── 📂 src/                  # Código fuente
-│   ├── 📂 components/       # Componentes React
-│   ├── 📂 styles/           # Estilos CSS
-│   ├── 📂 assets/           # Imágenes y fuentes
-│   ├── 📂 __tests__/        # Pruebas unitarias
-│   ├── 📄 App.js            # Componente principal
-│   ├── 📄 index.js          # Punto de entrada
-│   ├── 📄 App.test.js       # Prueba del componente App
-├── 📂 .github/workflows/    # Configuración de GitHub Actions
-│   ├── 📄 test-suite.yml    # Workflow para ejecutar pruebas
-├── 📄 package.json          # Dependencias y scripts
-├── 📄 README.md             # Documentación del proyecto
+
+## Stack
+
+- `react` + `react-scripts`
+- CSS personalizado en `src/styles`
+- `@testing-library/react` y `jest-dom`
+- GitHub Actions para pruebas basicas en `master`
+
+## Scripts
+
+```sh
+npm start
+npm test -- --watchAll=false
+npm run build
 ```
 
-## 🛠 Tecnologías Utilizadas
+## Notas
 
-- ⚛️ **React** - Framework para la interfaz de usuario
-- 💅 **CSS** - Estilos personalizados
-- 🧪 **Jest + React Testing Library** - Pruebas unitarias y de integración
-- 🛠 **GitHub Actions** - Integración continua para pruebas automáticas
+- El sitio es una SPA de una sola pagina con secciones para perfil, skills, certificaciones, experiencia y contacto.
+- Los assets visuales viven en `public/icons`.
+- La prueba actual cubre el componente `Header`.
 
-## 🚀 Instalación y Uso
+## Contacto
 
-1. Clonar el repositorio:
-   ```sh
-   git clone https://github.com/CesBear/sdet-portfolio.git
-   cd sdet-portfolio
-   ```
-2. Instalar dependencias:
-   ```sh
-   npm install
-   ```
-3. Ejecutar el proyecto en modo desarrollo:
-   ```sh
-   npm start
-   ```
-4. Ejecutar las pruebas:
-   ```sh
-   npm test
-   ```
-
-## 🔄 Integración Continua (CI)
-
-Este proyecto usa **GitHub Actions** para ejecutar pruebas en cada **merge a `master`**. Configuración en `.github/workflows/test-suite.yml`.
-
-## 📬 Contacto
-
-📧 Email: [carr@cesbear.com](mailto:carr@cesbear.com)  
-🔗 LinkedIn: [César Alejandro Ramírez](https://www.linkedin.com/in/cesar-alejandro-ramirez/)  
-🐙 GitHub: [CesBear](https://github.com/CesBear)
+- Email: [carr@cesbear.com](mailto:carr@cesbear.com)
+- LinkedIn: [Cesar Alejandro Ramirez](https://www.linkedin.com/in/cesar-alejandro-ramirez/)
+- GitHub: [CesBear](https://github.com/CesBear)

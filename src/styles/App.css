@@ -761,7 +761,7 @@ section { border-bottom: 1px solid var(--border-color); }
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at 50% 0%, rgba(var(--card-accent, 0,212,255), 0.08) 0%, transparent 70%);
+  background: radial-gradient(ellipse at 50% 0%, rgba(var(--card-accent-rgb, 0, 212, 255), 0.08) 0%, transparent 70%);
   opacity: 0;
   transition: opacity 0.4s ease;
   pointer-events: none;

@@ -102,8 +102,8 @@ const lerp3 = (a, b, t) => a.map((v, i) => v + (b[i] - v) * t);
 const Header = ({ darkMode, toggleTheme }) => {
   const [displayText, setDisplayText] = useState('');
   const [modeIndex, setModeIndex]     = useState(0);
-  const [transitioning, setTransitioning] = useState(false);
   const canvasRef  = useRef(null);
+  const infoRef    = useRef(null);
   const modeIdxRef = useRef(0);
 
   // Typing
@@ -170,8 +170,8 @@ const Header = ({ darkMode, toggleTheme }) => {
         modeTime = 0;
       }
 
-      // Signal transition state for CSS animation
-      setTransitioning(blend > 0.05 && blend < 0.95);
+      const isTransitioning = blend > 0.05 && blend < 0.95;
+      infoRef.current?.classList.toggle('transitioning', isTransitioning);
 
       const modeA = MODES[modeIdxRef.current];
       const modeB = MODES[(modeIdxRef.current + 1) % MODES.length];
@@ -244,7 +244,7 @@ const Header = ({ darkMode, toggleTheme }) => {
       <canvas ref={canvasRef} className="hero-canvas" aria-hidden="true" />
 
       {/* Mode info pill — bottom of hero, above canvas */}
-      <div className={`cymatics-info${transitioning ? ' transitioning' : ''}`}>
+      <div ref={infoRef} className="cymatics-info">
         <span className="cymatics-dot" style={{ background: accentColor, boxShadow: `0 0 8px ${accentColor}` }} />
         <span className="cymatics-name" style={{ color: accentColor }}>{mode.name}</span>
         <span className="cymatics-sep">·</span>

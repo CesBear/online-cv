@@ -7,6 +7,7 @@ const CONTACTS = [
     value: 'carr@cesbear.com',
     href: 'mailto:carr@cesbear.com',
     color: '#00d4ff',
+    colorRgb: '0, 212, 255',
   },
   {
     img: '/icons/linkedin.svg',
@@ -14,6 +15,7 @@ const CONTACTS = [
     value: 'cesar-alejandro-ramirez',
     href: 'https://www.linkedin.com/in/cesar-alejandro-ramirez/',
     color: '#0a66c2',
+    colorRgb: '10, 102, 194',
   },
   {
     img: '/icons/github.svg',
@@ -21,6 +23,7 @@ const CONTACTS = [
     value: 'CesBear',
     href: 'https://github.com/CesBear',
     color: '#e6edf3',
+    colorRgb: '230, 237, 243',
   },
 ];
 
@@ -42,7 +45,7 @@ const Contact = () => {
               className="contact-card-v2"
               target={c.href.startsWith('mailto') ? undefined : '_blank'}
               rel={c.href.startsWith('mailto') ? undefined : 'noopener noreferrer'}
-              style={{ '--card-accent': c.color }}
+              style={{ '--card-accent': c.color, '--card-accent-rgb': c.colorRgb }}
             >
               <div className="contact-card-icon-v2">
                 {c.img
