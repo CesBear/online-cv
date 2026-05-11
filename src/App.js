@@ -7,6 +7,7 @@ import Skills from './components/Skills/Skills';
 import Certifications from './components/Certification/Certifications';
 import Experience from './components/Experience/Experience';
 import Contact from './components/Contact/Contact';
+import GameDev from './components/GameDev/GameDev';
 const App = () => {
   const [darkMode, setDarkMode] = useState(
     localStorage.getItem('theme') !== 'light'
@@ -41,6 +42,7 @@ const App = () => {
       <Skills />
       <Certifications />
       <Experience />
+      <GameDev />
       <Contact />
     </div>
   );

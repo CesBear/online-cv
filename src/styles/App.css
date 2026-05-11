@@ -713,6 +713,128 @@ section { border-bottom: 1px solid var(--border-color); }
   color: var(--text-muted);
 }
 
+/* === GAME DEV === */
+.gamedev-intro {
+  color: var(--text-muted);
+  font-size: 0.97rem;
+  margin-bottom: 36px;
+  line-height: 1.8;
+}
+.gamedev-intro strong { color: var(--text-primary); }
+
+.gamedev-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.gamedev-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 28px 24px;
+  backdrop-filter: blur(10px);
+  transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.gamedev-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--gradient);
+  transform: scaleX(0);
+  transition: transform 0.35s ease;
+}
+.gamedev-card:hover {
+  border-color: rgba(0, 212, 255, 0.4);
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
+}
+.gamedev-card:hover::before { transform: scaleX(1); }
+
+.gamedev-card-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.gamedev-icon {
+  font-size: 2rem;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.gamedev-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+
+.gamedev-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.72rem;
+  color: var(--accent-secondary);
+  font-family: 'Courier New', monospace;
+}
+.gamedev-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-secondary);
+  animation: pulse-dot 2.5s ease infinite;
+}
+
+.gamedev-desc {
+  font-size: 0.87rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+  margin-bottom: 20px;
+}
+
+.gamedev-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-bottom: 20px;
+}
+.gamedev-tag {
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 0.76rem;
+  font-weight: 500;
+  border: 1px solid var(--border-color);
+  background: var(--bg-secondary);
+  color: var(--text-muted);
+  transition: border-color 0.2s, color 0.2s;
+}
+.gamedev-card:hover .gamedev-tag {
+  border-color: rgba(0, 212, 255, 0.3);
+  color: var(--text-primary);
+}
+
+.gamedev-confidential {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.74rem;
+  color: var(--text-muted);
+  font-family: 'Courier New', monospace;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-color);
+  opacity: 0.7;
+}
+.gamedev-lock { font-size: 0.85rem; }
+
+@media (max-width: 600px) {
+  .gamedev-grid { grid-template-columns: 1fr; }
+}
+
 /* === CONTACT === */
 .contact-intro {
   color: var(--text-muted);
