@@ -123,18 +123,23 @@ const Header = ({ darkMode, toggleTheme }) => {
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
 
-    let W = 0, H = 0, animId;
+    let W = 0, H = 0, dpr = 1, animId;
     let time = 0, modeTime = 0;
 
     const off = document.createElement('canvas');
     const offCtx = off.getContext('2d');
-    const SCALE = 4;
+
+    // Adaptive scale: smaller viewports need finer off-screen resolution
+    const getScale = (w) => w < 480 ? 2 : w < 900 ? 3 : 4;
 
     const resize = () => {
-      W = canvas.offsetWidth;
-      H = canvas.offsetHeight;
-      canvas.width = W;
-      canvas.height = H;
+      // Cap dpr at 2 — 3x adds 9× pixels with minimal visual gain on this effect
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      W   = canvas.offsetWidth;
+      H   = canvas.offsetHeight;
+      // Physical pixels → crisp on Retina / high-DPI mobile
+      canvas.width  = Math.round(W * dpr);
+      canvas.height = Math.round(H * dpr);
     };
     resize();
     window.addEventListener('resize', resize);
@@ -176,6 +181,8 @@ const Header = ({ darkMode, toggleTheme }) => {
       const modeA = MODES[modeIdxRef.current];
       const modeB = MODES[(modeIdxRef.current + 1) % MODES.length];
 
+      const SCALE = getScale(W);
+      // Off-screen buffer at CSS-pixel resolution / SCALE — drawn to physical pixels
       const sw = Math.max(1, Math.ceil(W / SCALE));
       const sh = Math.max(1, Math.ceil(H / SCALE));
       if (off.width !== sw || off.height !== sh) {
@@ -220,10 +227,11 @@ const Header = ({ darkMode, toggleTheme }) => {
       }
 
       offCtx.putImageData(imageData, 0, 0);
-      ctx.clearRect(0, 0, W, H);
+      // Draw to full physical pixel canvas → browser never re-scales it blurrily
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.imageSmoothingEnabled = true;
       ctx.imageSmoothingQuality = 'high';
-      ctx.drawImage(off, 0, 0, W, H);
+      ctx.drawImage(off, 0, 0, canvas.width, canvas.height);
 
       animId = requestAnimationFrame(draw);
     };
