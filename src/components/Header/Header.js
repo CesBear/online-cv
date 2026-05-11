@@ -6,36 +6,30 @@ const BADGES = ['14+ Years IT', 'SDET', 'AI-Driven Testing', 'MERN Stack', 'Mobi
 const MODES = [
   {
     name: 'Pentagon',
-    freq: '440 Hz',
-    note: 'La',
-    sources: 5,
+    freq: '440 Hz', freqHz: 440,
+    note: 'La',    sources: 5,
     desc: 'Concert pitch — the universal tuning reference',
-    K: 24,
-    color: [0, 212, 255],
+    K: 24, color: [0, 212, 255],
     orbits: Array.from({ length: 5 }, (_, i) => ({
       r: 0.30, sx: 0.075, sy: 0.055, phase: (i / 5) * Math.PI * 2,
     })),
   },
   {
     name: 'Hexagon',
-    freq: '528 Hz',
-    note: 'Mi',
-    sources: 6,
+    freq: '528 Hz', freqHz: 528,
+    note: 'Mi',    sources: 6,
     desc: 'Transformation tone — associated with DNA repair',
-    K: 34,
-    color: [57, 211, 83],
+    K: 34, color: [57, 211, 83],
     orbits: Array.from({ length: 6 }, (_, i) => ({
       r: 0.28, sx: 0.058, sy: 0.058, phase: (i / 6) * Math.PI * 2,
     })),
   },
   {
     name: 'Dense',
-    freq: '741 Hz',
-    note: 'Sol',
-    sources: 9,
+    freq: '741 Hz', freqHz: 741,
+    note: 'Sol',   sources: 9,
     desc: 'Intuition frequency — expression & problem solving',
-    K: 44,
-    color: [163, 113, 247],
+    K: 44, color: [163, 113, 247],
     orbits: Array.from({ length: 9 }, (_, i) => ({
       r: 0.18 + (i % 3) * 0.08,
       sx: 0.068 + (i % 4) * 0.018,
@@ -45,12 +39,10 @@ const MODES = [
   },
   {
     name: 'Spiral',
-    freq: '396 Hz',
-    note: 'Ut',
-    sources: 6,
+    freq: '396 Hz', freqHz: 396,
+    note: 'Ut',    sources: 6,
     desc: 'Liberation tone — releasing fear & guilt',
-    K: 18,
-    color: [255, 160, 50],
+    K: 18, color: [255, 160, 50],
     orbits: [
       { r: 0.10, sx: 0.17, sy: 0.11, phase: 0 },
       { r: 0.18, sx: 0.13, sy: 0.09, phase: Math.PI * 0.5 },
@@ -62,12 +54,10 @@ const MODES = [
   },
   {
     name: 'Star',
-    freq: '963 Hz',
-    note: 'Si',
-    sources: 7,
+    freq: '963 Hz', freqHz: 963,
+    note: 'Si',    sources: 7,
     desc: 'Divine consciousness — pineal gland activation',
-    K: 38,
-    color: [0, 230, 200],
+    K: 38, color: [0, 230, 200],
     orbits: [
       ...Array.from({ length: 3 }, (_, i) => ({
         r: 0.32, sx: 0.062, sy: 0.048, phase: (i / 3) * Math.PI * 2,
@@ -80,12 +70,10 @@ const MODES = [
   },
   {
     name: 'Noise',
-    freq: '174 Hz',
-    note: 'Fa',
-    sources: 11,
+    freq: '174 Hz', freqHz: 174,
+    note: 'Fa',    sources: 11,
     desc: 'Foundation frequency — the lowest Solfeggio tone',
-    K: 14,
-    color: [200, 80, 255],
+    K: 14, color: [200, 80, 255],
     orbits: Array.from({ length: 11 }, (_, i) => ({
       r: 0.10 + (i % 5) * 0.045,
       sx: 0.04 + (i % 7) * 0.015,
@@ -102,9 +90,108 @@ const lerp3 = (a, b, t) => a.map((v, i) => v + (b[i] - v) * t);
 const Header = ({ darkMode, toggleTheme }) => {
   const [displayText, setDisplayText] = useState('');
   const [modeIndex, setModeIndex]     = useState(0);
+  const [playing, setPlaying]         = useState(false);
   const canvasRef  = useRef(null);
   const infoRef    = useRef(null);
   const modeIdxRef = useRef(0);
+  const audioCtxRef = useRef(null);
+  const nodesRef    = useRef(null);
+
+  // ── Audio helpers ────────────────────────────────────────────────────────
+  const stopNodes = (fadeMs = 400) => {
+    if (!nodesRef.current || !audioCtxRef.current) return;
+    const { masterGain, osc1, osc2, lfo } = nodesRef.current;
+    const ctx = audioCtxRef.current;
+    const now = ctx.currentTime;
+    masterGain.gain.cancelScheduledValues(now);
+    masterGain.gain.setValueAtTime(masterGain.gain.value, now);
+    masterGain.gain.linearRampToValueAtTime(0, now + fadeMs / 1000);
+    setTimeout(() => {
+      try { osc1.stop(); osc2.stop(); lfo.stop(); } catch (_) {}
+      nodesRef.current = null;
+    }, fadeMs + 50);
+  };
+
+  const startAudio = (freqHz) => {
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return;
+    if (!audioCtxRef.current) audioCtxRef.current = new AC();
+    const ctx = audioCtxRef.current;
+    if (ctx.state === 'suspended') ctx.resume();
+
+    stopNodes(200);
+
+    setTimeout(() => {
+      if (!audioCtxRef.current) return;
+      const now = ctx.currentTime;
+
+      // Master gain — gentle fade-in
+      const masterGain = ctx.createGain();
+      masterGain.gain.setValueAtTime(0, now);
+      masterGain.gain.linearRampToValueAtTime(0.07, now + 0.5);
+      masterGain.connect(ctx.destination);
+
+      // Osc 1: fundamental sine — main tone
+      const osc1 = ctx.createOscillator();
+      const g1   = ctx.createGain();
+      g1.gain.value = 0.75;
+      osc1.type = 'sine';
+      osc1.frequency.value = freqHz;
+      osc1.connect(g1); g1.connect(masterGain);
+
+      // Osc 2: octave up at low volume — adds warmth like a singing bowl
+      const osc2 = ctx.createOscillator();
+      const g2   = ctx.createGain();
+      g2.gain.value = 0.18;
+      osc2.type = 'sine';
+      osc2.frequency.value = freqHz * 2;
+      osc2.connect(g2); g2.connect(masterGain);
+
+      // LFO: very slow tremolo (0.4 Hz) — makes it feel alive, not static
+      const lfo     = ctx.createOscillator();
+      const lfoGain = ctx.createGain();
+      lfo.frequency.value = 0.4;
+      lfoGain.gain.value  = 0.012;
+      lfo.connect(lfoGain);
+      lfoGain.connect(masterGain.gain);
+
+      osc1.start(); osc2.start(); lfo.start();
+      nodesRef.current = { masterGain, osc1, osc2, lfo };
+    }, 250);
+  };
+
+  const toggleAudio = () => {
+    if (playing) {
+      stopNodes(500);
+      setPlaying(false);
+    } else {
+      startAudio(MODES[modeIdxRef.current].freqHz);
+      setPlaying(true);
+    }
+  };
+
+  // Update frequency smoothly when mode changes while audio is on
+  useEffect(() => {
+    if (playing && nodesRef.current && audioCtxRef.current) {
+      const ctx  = audioCtxRef.current;
+      const freq = MODES[modeIndex].freqHz;
+      const now  = ctx.currentTime;
+      nodesRef.current.osc1.frequency.linearRampToValueAtTime(freq,     now + 1.2);
+      nodesRef.current.osc2.frequency.linearRampToValueAtTime(freq * 2, now + 1.2);
+    }
+  }, [modeIndex, playing]);
+
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      stopNodes(100);
+      if (audioCtxRef.current) {
+        audioCtxRef.current.close();
+        audioCtxRef.current = null;
+      }
+    };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Typing
   useEffect(() => {
@@ -253,6 +340,15 @@ const Header = ({ darkMode, toggleTheme }) => {
 
       {/* Mode info pill — bottom of hero, above canvas */}
       <div ref={infoRef} className="cymatics-info">
+        <button
+          className={`cymatics-audio-btn${playing ? ' active' : ''}`}
+          onClick={toggleAudio}
+          title={playing ? 'Stop frequency' : `Listen to ${mode.freq}`}
+          style={{ '--accent': accentColor }}
+          aria-label={playing ? 'Stop audio' : 'Play frequency tone'}
+        >
+          {playing ? '◼' : '♪'}
+        </button>
         <span className="cymatics-dot" style={{ background: accentColor, boxShadow: `0 0 8px ${accentColor}` }} />
         <span className="cymatics-name" style={{ color: accentColor }}>{mode.name}</span>
         <span className="cymatics-sep">·</span>
