@@ -16,19 +16,24 @@ describe('Header Component', () => {
 
   test('renders Dark Mode button when darkMode is false', () => {
     render(<Header darkMode={false} toggleTheme={() => {}} />);
-    expect(screen.getByRole('button')).toHaveTextContent('Dark Mode');
+    expect(screen.getByRole('button', { name: /dark mode/i })).toBeInTheDocument();
   });
 
   test('renders Light Mode button when darkMode is true', () => {
     render(<Header darkMode={true} toggleTheme={() => {}} />);
-    expect(screen.getByRole('button')).toHaveTextContent('Light Mode');
+    expect(screen.getByRole('button', { name: /light mode/i })).toBeInTheDocument();
   });
 
-  test('calls toggleTheme when button is clicked', () => {
+  test('calls toggleTheme when theme button is clicked', () => {
     const mockToggle = jest.fn();
     render(<Header darkMode={false} toggleTheme={mockToggle} />);
-    fireEvent.click(screen.getByRole('button'));
+    fireEvent.click(screen.getByRole('button', { name: /dark mode/i }));
     expect(mockToggle).toHaveBeenCalledTimes(1);
+  });
+
+  test('renders audio play button', () => {
+    render(<Header darkMode={false} toggleTheme={() => {}} />);
+    expect(screen.getByRole('button', { name: /play frequency/i })).toBeInTheDocument();
   });
 
   test('renders hero badges', () => {

@@ -42,3 +42,11 @@ const mockCtx = {
 };
 
 HTMLCanvasElement.prototype.getContext = () => mockCtx;
+
+// IntersectionObserver is not implemented in jsdom
+global.IntersectionObserver = class {
+  constructor(cb) { this.cb = cb; }
+  observe()    {}
+  unobserve()  {}
+  disconnect() {}
+};
