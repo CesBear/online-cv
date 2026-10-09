@@ -5,7 +5,7 @@ Repositorio de la pagina personal de Cesar Ramirez como Software Development Eng
 ## Estructura actual
 
 ```text
-online-cv/
+my-cv-page/
 |-- public/
 |   |-- icons/
 |   |-- favicon.ico
@@ -19,6 +19,7 @@ online-cv/
 |   |   |-- Certification/
 |   |   |-- Contact/
 |   |   |-- Experience/
+|   |   |-- GameDev/
 |   |   |-- Header/
 |   |   |-- Navigation/
 |   |   `-- Skills/
@@ -49,9 +50,10 @@ npm run build
 
 ## Notas
 
-- El sitio es una SPA de una sola pagina con secciones para perfil, skills, certificaciones, experiencia y contacto.
+- El sitio es una SPA de una sola pagina con secciones para perfil, skills, certificaciones, experiencia, game dev y contacto.
 - Los assets visuales viven en `public/icons`.
-- La prueba actual cubre el componente `Header`.
+- Cada componente tiene su archivo de test junto a el (`*.test.js`).
+- El canvas del Header se pausa cuando no es visible y las animaciones respetan `prefers-reduced-motion`.
 
 ## Contacto
 

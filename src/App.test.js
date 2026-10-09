@@ -50,7 +50,7 @@ describe('App Component', () => {
     expect(document.getElementById('skills')).toBeInTheDocument();
     expect(document.getElementById('experience')).toBeInTheDocument();
     expect(document.getElementById('certifications')).toBeInTheDocument();
-    expect(document.getElementById('gamedev')).toBeInTheDocument();
+    expect(document.getElementById('projects')).toBeInTheDocument();
     expect(document.getElementById('contact')).toBeInTheDocument();
   });
 });

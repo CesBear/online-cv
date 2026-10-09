@@ -41,4 +41,13 @@ describe('Header Component', () => {
     expect(screen.getByText('SDET')).toBeInTheDocument();
     expect(screen.getByText('AI-Driven Testing')).toBeInTheDocument();
   });
+
+  test('shows the frequency explanation tooltip when the help button is clicked', () => {
+    render(<Header darkMode={false} toggleTheme={() => {}} />);
+    const help = screen.getByRole('button', { name: /why these frequencies/i });
+    expect(help).toHaveAttribute('aria-expanded', 'false');
+    fireEvent.click(help);
+    expect(help).toHaveAttribute('aria-expanded', 'true');
+    expect(screen.getByRole('tooltip', { hidden: true })).toHaveTextContent(/cymatics is sound made visible/i);
+  });
 });

@@ -11,7 +11,7 @@ describe('Navigation Component', () => {
     expect(screen.getByRole('link', { name: /experience/i })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /certifications/i })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /contact/i })).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /game dev/i })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /side projects/i })).toBeInTheDocument();
   });
 
   test('nav links have correct href anchors', () => {
@@ -19,7 +19,7 @@ describe('Navigation Component', () => {
     expect(screen.getByRole('link', { name: /about/i })).toHaveAttribute('href', '#about');
     expect(screen.getByRole('link', { name: /skills/i })).toHaveAttribute('href', '#skills');
     expect(screen.getByRole('link', { name: /experience/i })).toHaveAttribute('href', '#experience');
-    expect(screen.getByRole('link', { name: /game dev/i })).toHaveAttribute('href', '#gamedev');
+    expect(screen.getByRole('link', { name: /side projects/i })).toHaveAttribute('href', '#projects');
     expect(screen.getByRole('link', { name: /contact/i })).toHaveAttribute('href', '#contact');
   });
 });

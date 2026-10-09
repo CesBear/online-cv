@@ -36,6 +36,7 @@ const App = () => {
 
   return (
     <div className="app">
+      <a href="#about" className="skip-link">Skip to content</a>
       <Header darkMode={darkMode} toggleTheme={toggleTheme} />
       <Navigation />
       <About />

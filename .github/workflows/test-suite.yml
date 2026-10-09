@@ -14,15 +14,19 @@ jobs:
 
     steps:
       - name: 📥 Checkout código
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: 🏗 Configurar Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '20'
+          cache: npm
 
       - name: 📦 Instalar dependencias
-        run: npm install
+        run: npm ci
 
       - name: 🧪 Ejecutar pruebas
         run: CI=true npm test -- --watchAll=false --forceExit
+
+      - name: 🏗 Build
+        run: CI=true npm run build

@@ -6,7 +6,14 @@ import GameDev from './GameDev';
 describe('GameDev Component', () => {
   test('renders section heading', () => {
     render(<GameDev />);
-    expect(screen.getByRole('heading', { level: 2 })).toHaveTextContent('Game Development');
+    expect(screen.getByRole('heading', { level: 2 })).toHaveTextContent('Side Projects');
+  });
+
+  test('renders MaestroMusic with live links', () => {
+    render(<GameDev />);
+    expect(screen.getByText('MaestroMusic')).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /visit/i })).toHaveAttribute('href', 'https://musicappgit.vercel.app');
+    expect(screen.getByRole('link', { name: /source/i })).toHaveAttribute('href', 'https://github.com/CesBear/musicApp');
   });
 
   test('renders both platforms', () => {

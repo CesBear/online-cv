@@ -17,8 +17,8 @@ const MODES = [
   {
     name: 'Hexagon',
     freq: '528 Hz', freqHz: 528,
-    note: 'Mi',    sources: 6,
-    desc: 'Transformation tone — associated with DNA repair',
+    note: 'Do',    sources: 6,
+    desc: 'Solfeggio tone — traditionally called the "transformation" tone',
     K: 34, color: [57, 211, 83],
     orbits: Array.from({ length: 6 }, (_, i) => ({
       r: 0.28, sx: 0.058, sy: 0.058, phase: (i / 6) * Math.PI * 2,
@@ -27,8 +27,8 @@ const MODES = [
   {
     name: 'Dense',
     freq: '741 Hz', freqHz: 741,
-    note: 'Sol',   sources: 9,
-    desc: 'Intuition frequency — expression & problem solving',
+    note: 'Fa♯',   sources: 9,
+    desc: 'Solfeggio tone — traditionally linked to expression',
     K: 44, color: [163, 113, 247],
     orbits: Array.from({ length: 9 }, (_, i) => ({
       r: 0.18 + (i % 3) * 0.08,
@@ -40,8 +40,8 @@ const MODES = [
   {
     name: 'Spiral',
     freq: '396 Hz', freqHz: 396,
-    note: 'Ut',    sources: 6,
-    desc: 'Liberation tone — releasing fear & guilt',
+    note: 'Sol',   sources: 6,
+    desc: 'Solfeggio tone — traditionally called the "liberation" tone',
     K: 18, color: [255, 160, 50],
     orbits: [
       { r: 0.10, sx: 0.17, sy: 0.11, phase: 0 },
@@ -56,7 +56,7 @@ const MODES = [
     name: 'Star',
     freq: '963 Hz', freqHz: 963,
     note: 'Si',    sources: 7,
-    desc: 'Divine consciousness — pineal gland activation',
+    desc: 'Solfeggio tone — the highest of the set, near a Si',
     K: 38, color: [0, 230, 200],
     orbits: [
       ...Array.from({ length: 3 }, (_, i) => ({
@@ -72,7 +72,7 @@ const MODES = [
     name: 'Noise',
     freq: '174 Hz', freqHz: 174,
     note: 'Fa',    sources: 11,
-    desc: 'Foundation frequency — the lowest Solfeggio tone',
+    desc: 'Solfeggio tone — the lowest of the set',
     K: 14, color: [200, 80, 255],
     orbits: Array.from({ length: 11 }, (_, i) => ({
       r: 0.10 + (i % 5) * 0.045,
@@ -91,6 +91,7 @@ const Header = ({ darkMode, toggleTheme }) => {
   const [displayText, setDisplayText] = useState('');
   const [modeIndex, setModeIndex]     = useState(0);
   const [playing, setPlaying]         = useState(false);
+  const [infoOpen, setInfoOpen]       = useState(false);
   const canvasRef  = useRef(null);
   const infoRef    = useRef(null);
   const modeIdxRef = useRef(0);
@@ -322,10 +323,26 @@ const Header = ({ darkMode, toggleTheme }) => {
 
       animId = requestAnimationFrame(draw);
     };
+
+    // Pause the loop while the hero is off-screen or the tab is hidden
+    let inView = true;
+    const sync = () => {
+      const shouldRun = inView && !document.hidden;
+      if (shouldRun && !animId) draw();
+      else if (!shouldRun && animId) { cancelAnimationFrame(animId); animId = 0; }
+    };
+    const io = typeof IntersectionObserver !== 'undefined'
+      ? new IntersectionObserver(([e]) => { inView = e.isIntersecting; sync(); })
+      : null;
+    if (io) io.observe(canvas);
+    document.addEventListener('visibilitychange', sync);
     draw();
 
     return () => {
       cancelAnimationFrame(animId);
+      animId = 0;
+      if (io) io.disconnect();
+      document.removeEventListener('visibilitychange', sync);
       window.removeEventListener('resize', resize);
     };
   }, []);
@@ -346,6 +363,7 @@ const Header = ({ darkMode, toggleTheme }) => {
           title={playing ? 'Stop frequency' : `Listen to ${mode.freq}`}
           style={{ '--accent': accentColor }}
           aria-label={playing ? 'Stop audio' : 'Play frequency tone'}
+          aria-pressed={playing}
         >
           {playing ? '◼' : '♪'}
         </button>
@@ -358,6 +376,39 @@ const Header = ({ darkMode, toggleTheme }) => {
         <span className="cymatics-sources">{mode.sources} sources</span>
         <span className="cymatics-sep cymatics-sep-lg">—</span>
         <span className="cymatics-desc">{mode.desc}</span>
+        <button
+          className="cymatics-help-btn"
+          onClick={() => setInfoOpen(o => !o)}
+          onMouseEnter={() => setInfoOpen(true)}
+          onMouseLeave={() => setInfoOpen(false)}
+          onKeyDown={(e) => e.key === 'Escape' && setInfoOpen(false)}
+          aria-expanded={infoOpen}
+          aria-controls="cymatics-tip"
+          aria-label="Why these frequencies?"
+        >
+          ?
+        </button>
+      </div>
+
+      <div
+        id="cymatics-tip"
+        role="tooltip"
+        className={`cymatics-tip${infoOpen ? ' open' : ''}`}
+        style={{ '--accent': accentColor }}
+      >
+        <strong>Why these frequencies?</strong>
+        <p>
+          <b>Cymatics</b> is sound made visible. Each pattern comes from several moving
+          wave sources whose ripples overlap and interfere. A different frequency changes
+          the wavelength, so the whole pattern changes.
+        </p>
+        <p>
+          <b>440 Hz</b> is the standard concert pitch (La) used to tune instruments. The
+          others come from the <b>Solfeggio scale</b>, tones that tradition links to
+          wellness. That part is folklore, not proven science. I picked them because each
+          one looks and sounds distinct.
+        </p>
+        <p className="cymatics-tip-hint">Press ♪ to hear the current tone.</p>
       </div>
 
       <div className="hero-inner">
@@ -373,7 +424,7 @@ const Header = ({ darkMode, toggleTheme }) => {
           <div className="hero-badges">
             {BADGES.map(ba => <span key={ba} className="hero-badge">{ba}</span>)}
           </div>
-          <button className="theme-toggle" onClick={toggleTheme}>
+          <button className="theme-toggle" onClick={toggleTheme} aria-pressed={!darkMode}>
             {darkMode ? '☀️ Light Mode' : '🌙 Dark Mode'}
           </button>
         </div>
